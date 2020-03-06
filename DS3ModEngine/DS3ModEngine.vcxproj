@@ -124,23 +124,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AOBScanner.h" />
-    <ClInclude Include="d3d11hook.h" />
+    <ClInclude Include="ImGuiHook\d3d11hook.h" />
     <ClInclude Include="dinput8\dinput.h" />
     <ClInclude Include="dinput8\dinputWrapper.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameplayPatcher.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="HideThreadFromDebugger.h" />
+    <ClInclude Include="ImGuiHook\hooks.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="ImGui\imgui_impl_win32.h" />
     <ClInclude Include="ImGui\imgui_internal.h" />
-    <ClInclude Include="ImGui\stb_rect_pack.h" />
-    <ClInclude Include="ImGui\stb_textedit.h" />
-    <ClInclude Include="ImGui\stb_truetype.h" />
-    <ClInclude Include="imgui_impl_dx11.h" />
-    <ClInclude Include="InputHook.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="ImGuiHook\inputhook.h" />
+    <ClInclude Include="Kiero\kiero.h" />
     <ClInclude Include="LooseParams.h" />
-    <ClInclude Include="Menu.h" />
+    <ClInclude Include="ImGuiHook\menu.h" />
     <ClInclude Include="MinHook\include\MinHook.h" />
     <ClInclude Include="MinHook\src\buffer.h" />
     <ClInclude Include="MinHook\src\HDE\hde32.h" />
@@ -159,19 +163,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AOBScanner.cpp" />
-    <ClCompile Include="d3d11hook.cpp" />
+    <ClCompile Include="ImGuiHook\d3d11hook.cpp" />
     <ClCompile Include="dinput8\dinputWrapper.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameplayPatcher.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="HideThreadFromDebugger.cpp" />
+    <ClCompile Include="ImGuiHook\hooks.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
-    <ClCompile Include="imgui_impl_dx11.cpp" />
-    <ClCompile Include="InputHook.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="ImGuiHook\inputhook.cpp" />
+    <ClCompile Include="Kiero\kiero.cpp" />
     <ClCompile Include="LooseParams.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="ImGuiHook\menu.cpp" />
     <ClCompile Include="MinHook\src\buffer.c" />
     <ClCompile Include="MinHook\src\HDE\hde32.c" />
     <ClCompile Include="MinHook\src\HDE\hde64.c" />
@@ -180,10 +189,12 @@
     <ClCompile Include="ModLoader.cpp" />
     <ClCompile Include="NetworkBlocker.cpp" />
     <ClCompile Include="StackWalker\StackWalker.cpp" />
-    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="_VirtualToArchivePathHook.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="METHODSTABLE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

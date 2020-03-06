@@ -1,11 +1,12 @@
 #include "ModLoader.h"
 #include "Game.h"
 #include "AOBScanner.h"
-#include "LeoSpecial/LeoSpecial.h"
+//#include "LeoSpecial/LeoSpecial.h"
 #include <stdio.h>
 #include <wchar.h>
 #include <Shlwapi.h>
 #include <concurrent_unordered_set.h>
+#include <string>
 
 #pragma comment(lib, "shlwapi.lib")
 
@@ -39,8 +40,8 @@ concurrency::concurrent_unordered_set<std::wstring> overrideSet;
 // Cached set of files that don't have an override and should be loaded from archives
 concurrency::concurrent_unordered_set<std::wstring> archiveSet;
 
-uintptr_t ArchiveVEHHookAddress = NULL;
-LeoHook ArchiveVEHHook;
+//uintptr_t ArchiveVEHHookAddress = NULL;
+//LeoHook ArchiveVEHHook;
 
 void* tVirtualToArchivePath(DLString *path, UINT64 p2, UINT64 p3, DLString *p4, UINT64 p5, UINT64 p6)
 {

@@ -1,12 +1,4 @@
 #include "dllmain.h"
-#include "Game.h"
-#include "d3d11hook.h"
-#include "StackWalker/StackWalker.h"
-#include <iostream>
-#include <strsafe.h>
-#include <stdio.h>
-#include <tchar.h>
-
 
 // Export DINPUT8
 tDirectInput8Create oDirectInput8Create;
@@ -111,7 +103,7 @@ BOOL ApplyPostUnpackHooks()
 		int temp;
 		std::cin.ignore();
 	}
-
+	
 	bool saveFilePatch = (GetPrivateProfileIntW(L"savefile", L"useAlternateSaveFile", 1, L".\\modengine.ini") == 1);
 	bool looseParamsPatch = (GetPrivateProfileIntW(L"files", L"loadLooseParams", 0, L".\\modengine.ini") == 1);
 	bool loadUXMFiles = (GetPrivateProfileIntW(L"files", L"loadUXMFiles", 0, L".\\modengine.ini") == 1);
@@ -173,6 +165,7 @@ DWORD64 __cdecl onSteamInit()
 
 BOOL InitInstance(HMODULE hModule)
 {
+	Globals::mainModule = hModule;
     // Load the real dinput8.dll, or chain load another dll injection
     HMODULE hMod = NULL;
 	wchar_t dllPath[MAX_PATH];
@@ -203,7 +196,7 @@ BOOL InitInstance(HMODULE hModule)
 		hMod = LoadLibraryW(dllPath);
 		oDirectInput8Create = (tDirectInput8Create)GetProcAddress(hMod, "DirectInput8Create");
 	}
-
+	
 	// Initialize MinHook
 	if (MH_Initialize() != MH_OK)
 	{
@@ -264,13 +257,17 @@ BOOL InitInstance(HMODULE hModule)
 
 BOOL ExitInstance()
 {
+	D3d11Hook::Release();
+	kiero::shutdown();
+	MH_Uninitialize();
+	InputHook::Remove(Globals::mainWindow);
     return true;
 }
 
 const LPCWSTR AppWindowTitleDS3 = L"DARK SOULS III"; // Targeted D11 Application Window Title.
 const LPCWSTR AppWindowTitleSekiro = L"Sekiro"; // Targeted D11 Application Window Title.
 
-DWORD WINAPI MainThread(HMODULE hModule)
+DWORD WINAPI MainThread()
 {
 	//Sleep(1000);
 	ApplyDS3SekiroAllocatorLimitPatch();
@@ -280,6 +277,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 		{
 
 		}
+		Globals::mainWindow = static_cast<HWND>(FindWindowW(0, AppWindowTitleDS3));
 	}
 	if (GetGameType() == GAME_SEKIRO)
 	{
@@ -301,15 +299,17 @@ DWORD WINAPI MainThread(HMODULE hModule)
 		GetWindowTextA(window, title, 255);
 
 		printf("Found window %s?\n", title);
+		Globals::mainWindow = static_cast<HWND>(FindWindowW(0, AppWindowTitleSekiro));
 	}
-	//bool s = ImplHookDX11_Init(hModule, FindWindowW(0, AppWindowTitle));
-	//if (!s)
-	//{
-	//	wprintf(L"Hooking failed\n");
-	//}
+	
+	const HRESULT s = Hooks::Init();
+	if (FAILED(s))
+	{
+		wprintf(L"Hooking failed\n");
+	}
 
 	ApplyPostUnpackHooks();
-
+	
 	return S_OK;
 }
 
@@ -334,10 +334,10 @@ public:
 	}
 
 protected:
-	virtual void OnOutput(LPCSTR szText) 
+	virtual void OnOutput(LPCSTR szText)
 	{
 		fprintf(file, "%s", szText);
-		printf("%s", szText); 
+		printf("%s", szText);
 	}
 };
 
@@ -440,7 +440,7 @@ static void InitUnhandledExceptionFilter()
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	InitUnhandledExceptionFilter();
-
+	
 	if (GetPrivateProfileIntW(L"debug", L"showDebugLog", 0, L".\\modengine.ini") == 1)
 	{
 		AllocConsole();
@@ -459,7 +459,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 		if (GetGameType() == GAME_DARKSOULS_3)
 		{
 			// Experimental threaded patcher
-			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)MainThread, hModule, NULL, NULL);
+			CreateThread(NULL, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(MainThread), NULL, NULL, NULL);
 		}
         break;
     case DLL_PROCESS_DETACH:

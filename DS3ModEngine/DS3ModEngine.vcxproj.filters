@@ -43,6 +43,9 @@
     <Filter Include="Source Files\StackWalker">
       <UniqueIdentifier>{c413b239-df4e-491b-a4ab-9b43b5379d9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Kiero">
+      <UniqueIdentifier>{40e2a949-205d-43fb-9e16-6c7c194498ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dinput8\dinput.h">
@@ -99,6 +102,12 @@
     <ClInclude Include="AOBScanner.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuiHook\d3d11hook.h">
+      <Filter>Source Files\ImGuiHook</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files\ImGuiHook</Filter>
+    </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Source Files\ImGui</Filter>
     </ClInclude>
@@ -108,29 +117,35 @@
     <ClInclude Include="ImGui\imgui_internal.h">
       <Filter>Source Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="ImGui\stb_rect_pack.h">
+    <ClInclude Include="ImGui\imstb_rectpack.h">
       <Filter>Source Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="ImGui\stb_textedit.h">
+    <ClInclude Include="ImGui\imstb_textedit.h">
       <Filter>Source Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="ImGui\stb_truetype.h">
+    <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Source Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="d3d11hook.h">
+    <ClInclude Include="Kiero\kiero.h">
+      <Filter>Source Files\Kiero</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiHook\hooks.h">
       <Filter>Source Files\ImGuiHook</Filter>
     </ClInclude>
-    <ClInclude Include="imgui_impl_dx11.h">
+    <ClInclude Include="ImGuiHook\inputhook.h">
       <Filter>Source Files\ImGuiHook</Filter>
     </ClInclude>
-    <ClInclude Include="InputHook.h">
+    <ClInclude Include="ImGuiHook\menu.h">
       <Filter>Source Files\ImGuiHook</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Source Files\ImGuiHook</Filter>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>Source Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Source Files\ImGuiHook</Filter>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>Source Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="StackWalker\StackWalker.h">
       <Filter>Source Files\StackWalker</Filter>
@@ -184,6 +199,9 @@
     <ClCompile Include="AOBScanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuiHook\d3d11hook.cpp">
+      <Filter>Source Files\ImGuiHook</Filter>
+    </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
@@ -193,20 +211,29 @@
     <ClCompile Include="ImGui\imgui_draw.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="d3d11hook.cpp">
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Kiero\kiero.cpp">
+      <Filter>Source Files\Kiero</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiHook\hooks.cpp">
       <Filter>Source Files\ImGuiHook</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_impl_dx11.cpp">
+    <ClCompile Include="ImGuiHook\inputhook.cpp">
       <Filter>Source Files\ImGuiHook</Filter>
     </ClCompile>
-    <ClCompile Include="InputHook.cpp">
+    <ClCompile Include="ImGuiHook\menu.cpp">
       <Filter>Source Files\ImGuiHook</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files\ImGuiHook</Filter>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files\ImGuiHook</Filter>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="StackWalker\StackWalker.cpp">
       <Filter>Source Files\StackWalker</Filter>
@@ -216,5 +243,10 @@
     <MASM Include="_VirtualToArchivePathHook.asm">
       <Filter>Source Files\ModLoader</Filter>
     </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="METHODSTABLE.txt">
+      <Filter>Source Files\Kiero</Filter>
+    </Text>
   </ItemGroup>
 </Project>

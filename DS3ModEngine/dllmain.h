@@ -1,7 +1,13 @@
-#include <Windows.h>
-#include <string>
-#include <stdio.h>
-#include "dinput8\dinputWrapper.h"
+#pragma once
+
+#include "stdafx.h"
+#include <iostream>
+#include <strsafe.h>
+#include <tchar.h>
+
+#include "dinput8/dinputWrapper.h"
+#include "Game.h"
+#include "StackWalker/StackWalker.h"
 #include "HideThreadFromDebugger.h"
 #include "LooseParams.h"
 #include "NetworkBlocker.h"
